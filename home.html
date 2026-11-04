@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">NLP-BASED MEDICINE CATALOGUE</span>
+  <h1>Search medicine information.</h1>
+  <p>Search by medicine/brand name or active composition. The catalogue contains {{ medicine_count }} imported records.</p>
+  <form class="search-form" method="GET" action="{{ url_for('search') }}">
+    <input name="medicine" required placeholder="Try Augmentin, paracetamol, amoxicillin...">
+    <button type="submit">Search</button>
+  </form>
+  <p class="hint">Search examples: Augmentin · Dolo · Cetirizine · Amoxicillin</p>
+</section>
+<section class="info-grid">
+  <article><div class="tile-icon">⌕</div><h3>Smart Search</h3><p>Search product names and composition with text matching.</p></article>
+  <article><div class="tile-icon">▤</div><h3>CSV + SQLite</h3><p>Medicine records are imported from CSV into a searchable SQLite database.</p></article>
+  <article><div class="tile-icon">♙</div><h3>Age Awareness</h3><p>Your age is saved in your account. The catalogue does not prescribe age-based doses.</p></article>
+</section>
+<div class="notice"><strong>Medical safety:</strong> Catalogue metadata is not a clinical recommendation. Uses, side effects and dosage must be confirmed from an authoritative product leaflet and a qualified healthcare professional.</div>
+{% endblock %}

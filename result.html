@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back" href="{{ url_for('home') }}">← Back to search</a>
+<div class="result-heading">
+  <span class="eyebrow">SEARCH RESULTS</span>
+  <h1>Medicine results</h1>
+  <p>Search: "{{ query }}" · Your profile age: {{ age }}</p>
+</div>
+{% if results %}
+  <p class="muted">{{ results|length }} result(s) shown (maximum 20).</p>
+  {% for med in results %}
+  <section class="result-card">
+    <h2>{{ med.medicine_name }}</h2>
+    <div class="data-row"><h3>Composition</h3><p>{{ med.composition or "Not listed" }}</p></div>
+    <div class="data-row"><h3>Manufacturer</h3><p>{{ med.manufacturer or "Not listed" }}</p></div>
+    <div class="data-row"><h3>Pack size / form</h3><p>{{ med.dosage_form or "Not listed" }}</p></div>
+    <div class="data-row"><h3>Price in source catalogue</h3><p>{{ med.price or "Not listed" }}</p></div>
+    <div class="data-row"><h3>Uses</h3><p>{{ med.uses }}</p></div>
+    <div class="data-row"><h3>Side effects</h3><p>{{ med.side_effects }}</p></div>
+    <div class="data-row"><h3>Age-related precautions</h3><p>{{ med.age_precautions }}</p></div>
+    <div class="data-row"><h3>Dosage information</h3><p>{{ med.dosage_info }}</p></div>
+    <div class="alert"><strong>Data status:</strong><p>{{ med.verified_status }}</p><p>{{ med.warnings }}</p></div>
+    <p class="source">Source: {{ med.source }}</p>
+  </section>
+  {% endfor %}
+{% else %}
+  <section class="auth-card"><h2>No matching medicine found</h2><p>Try a product name or composition spelling from the catalogue.</p><a class="button-link" href="{{ url_for('home') }}">Search again</a></section>
+{% endif %}
+<div class="notice"><strong>Important:</strong> This student project does not diagnose, prescribe or calculate a personal dose. Do not take medicine based on this page. Ask a doctor or pharmacist and follow the exact product leaflet.</div>
+{% endblock %}
